@@ -77,20 +77,6 @@
       top: 0px;
       left: 0px;
     }
-    .gwd-img-xush {
-      position: absolute;
-      width: 300px;
-      height: 250px;
-      top: 0px;
-      left: 0px;
-    }
-    .gwd-img-bnxp {
-      position: absolute;
-      width: 300px;
-      height: 250px;
-      top: 0px;
-      left: 0px;
-    }
     .gwd-img-s9ah {
       position: absolute;
       width: 300px;
@@ -119,12 +105,84 @@
       top: 0px;
       left: 0px;
     }
-  </style><script data-source="googbase_min.js" data-version="4" data-exports-type="googbase" src="googbase_min.js"></script><script data-source="gwd_webcomponents_min.js" data-version="5" data-exports-type="gwd_webcomponents" src="gwd_webcomponents_min.js"></script>
+    .gwd-div-1vig {
+      position: absolute;
+      left: 0px;
+      top: 0px;
+      width: 300px;
+      height: 250px;
+    }
+    .gwd-div-58bg {
+      position: absolute;
+      width: 300px;
+      height: 250px;
+      left: 0px;
+      top: 0px;
+    }
+    .gwd-div-mgj6 {
+      position: absolute;
+      left: 0px;
+      top: 0px;
+      width: 300px;
+      height: 250px;
+    }
+    .gwd-div-10xu {
+      position: absolute;
+      left: 0px;
+      top: 0px;
+      width: 300px;
+      height: 250px;
+    }
+    .gwd-div-esuw {
+      height: 250px;
+      left: 0px;
+      position: absolute;
+      top: 0px;
+      width: 300px;
+      transform-style: preserve-3d;
+      transform: translate3d(-300px, 0px, 0px);
+    }
+    .gwd-div-z5h5 {
+      position: absolute;
+      width: 63.6px;
+      height: 249.994px;
+      left: 1.21307e-05px;
+      top: 0.009px;
+    }
+  </style>
+  <link href="../Common/Ad.css" rel="stylesheet">
+  <script type="text/javascript" src="../Common/Ad.js"></script><script data-source="googbase_min.js" data-version="4" data-exports-type="googbase" src="googbase_min.js"></script><script data-source="gwd_webcomponents_min.js" data-version="5" data-exports-type="gwd_webcomponents" src="gwd_webcomponents_min.js"></script>
   <script
   data-source="gwdpage_min.js" data-version="8" data-exports-type="gwd-page" src="gwdpage_min.js"></script><script data-source="gwdpagedeck_min.js" data-version="9" data-exports-type="gwd-pagedeck" src="gwdpagedeck_min.js"></script><script data-source="https://s0.2mdn.net/ads/studio/Enabler.js" data-exports-type="gwd-doubleclick" src="https://s0.2mdn.net/ads/studio/Enabler.js"></script>
     <script
-    data-source="gwddoubleclick_min.js" data-version="14" data-exports-type="gwd-doubleclick" src="gwddoubleclick_min.js"></script>
-      <script data-source="gwdimage_min.js" data-version="9" data-exports-type="gwd-image" src="gwdimage_min.js"></script>
+    data-source="gwddoubleclick_min.js" data-version="14" data-exports-type="gwd-doubleclick" src="gwddoubleclick_min.js"></script><script data-source="gwdimage_min.js" data-version="9" data-exports-type="gwd-image" src="gwdimage_min.js"></script>
+      <script type="text/javascript" gwd-events="support" src="gwd-events-support.1.0.js"></script>
+      <script type="text/javascript" gwd-events="handlers">
+        window.gwd = window.gwd || {};
+        gwd.cta = function(event) {
+          alert("CTA");
+        };
+        gwd.init = function(event) {
+          gwd.ad = new Ad({
+            width: 300,
+            height: 250
+          });
+        };
+      </script>
+      <script type="text/javascript" gwd-events="registration">
+        // Support code for event handling in Google Web Designer
+         // This script block is auto-generated. Please do not edit!
+        gwd.actions.events.registerEventHandlers = function(event) {
+          gwd.actions.events.addHandler('interaction', 'click', gwd.cta, false);
+          gwd.actions.events.addHandler('page1', 'pagepresenting', gwd.init, false);
+        };
+        gwd.actions.events.deregisterEventHandlers = function(event) {
+          gwd.actions.events.removeHandler('interaction', 'click', gwd.cta, false);
+          gwd.actions.events.removeHandler('page1', 'pagepresenting', gwd.init, false);
+        };
+        document.addEventListener("DOMContentLoaded", gwd.actions.events.registerEventHandlers);
+        document.addEventListener("unload", gwd.actions.events.deregisterEventHandlers);
+      </script>
 </head>
 
 <body>
@@ -133,15 +191,22 @@
     <div is="gwd-pagedeck" class="gwd-page-container" id="pagedeck">
       <div is="gwd-page" id="page1" class="gwd-page-wrapper gwd-page-size gwd-lightbox" data-gwd-width="300px" data-gwd-height="250px">
         <div class="gwd-page-content gwd-page-size">
-          <img is="gwd-image" source="assets/bg01.jpg" id="gwd-image_1" class="gwd-img-wlas">
-          <img is="gwd-image" source="assets/bg01_5.jpg" id="gwd-image_2" class="gwd-img-xush">
-          <img is="gwd-image" source="assets/bg02.jpg" id="gwd-image_3" class="gwd-img-bnxp">
-          <img is="gwd-image" source="assets/bg03.jpg" id="gwd-image_4" class="gwd-img-s9ah">
-          <img is="gwd-image" source="assets/img_arraste.png" id="gwd-image_5" class="gwd-img-13x2">
-          <img is="gwd-image" source="assets/img_bar.png" id="gwd-image_6" class="gwd-img-1x8z">
-          <img is="gwd-image" source="assets/img_logo.png" id="gwd-image_7" class="gwd-img-ka6o">
-          <img is="gwd-image" source="assets/txt01.png" id="gwd-image_8" class="gwd-img-1pw4">
-          <img is="gwd-image" source="assets/txt03.png" id="gwd-image_9" class="gwd-img-fbp1">
+          <img is="gwd-image" source="assets/bg03.jpg" id="bg" class="gwd-img-s9ah" data-gwd-tl-hidden="" data-gwd-tl-locked="">
+          <div class="gwd-div-1vig" id="underlay" data-gwd-tl-hidden="" data-gwd-tl-locked="">
+            <img is="gwd-image" source="assets/img_logo.png" id="logo" class="gwd-img-ka6o">
+            <img is="gwd-image" source="assets/txt03.png" id="txt-final" class="gwd-img-fbp1">
+          </div>
+          <img is="gwd-image" source="assets/bg01.jpg" id="img-before" class="gwd-img-wlas gwd-gen-jzbmgwdanimation">
+          <img is="gwd-image" source="assets/txt01.png" id="txt-tem" class="gwd-img-1pw4" data-gwd-tl-locked="" data-gwd-tl-hidden="">
+          <div class="gwd-div-mgj6" id="interaction">
+            <div class="gwd-div-58bg" id="cta"></div>
+            <div class="gwd-div-10xu" id="drag">
+              <img is="gwd-image" source="assets/img_arraste.png" id="drag-label" class="gwd-img-13x2">
+              <img is="gwd-image" source="assets/img_bar.png" id="drag-no-label" class="gwd-img-1x8z">
+              <div class="gwd-div-esuw" id="drag-mask" style="background: url('assets/bg02.jpg') no-repeat;"></div>
+              <div class="gwd-div-z5h5"></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
