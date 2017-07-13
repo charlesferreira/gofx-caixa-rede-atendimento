@@ -2,10 +2,10 @@ var Ad = function(options) {
     this.setup(options, {
         width: 300,
         height: 250,
-        autoPlayTimeOut: 5000,
+        autoPlayTimeOut: 6000,
         autoPlayMaxTimeOut: 20000,
         effects: {
-            demo: { transition: '0.5s ease-in-out', delay: 2500 }
+            //exemplo: { transition: '0.5s ease-in-out', delay: 2500 }
         },
     });
 }
@@ -63,4 +63,44 @@ Ad.prototype.animate = function(element, transition, properties, delay) {
         window.gwd.actions.events.setInlineStyle(element, style.join(';'));
     }.bind(this), delay || 0);
     return this;
+}
+
+Ad.prototype.onDragStart = function(event) {
+    this.isTeasing = false;
+    if (this.isAutoPlaying) return this;
+    this.dragging = true;
+    this.dragStartX = event.clientX;
+    console.log("onDragStart");
+}
+
+Ad.prototype.onDragFinish = function() {
+    if (this.isAutoPlaying) return this;
+    this.dragging = false;
+    console.log("onDragFinish");
+}
+
+Ad.prototype.onDragUpdate = function(event) {
+    if (this.dragging) {
+        var x = event.clientX - this.dragStartX;
+        gwd.actions.events.setInlineStyle('drag', 'transform: translateX(' + x + 'px)');
+        gwd.actions.events.setInlineStyle('drag-mask',
+            'background-position: ' + (this.width - x) + 'px center');
+    }
+}
+
+Ad.prototype.onTeaseOver = function() {
+    this.isTeasing = true;
+    var teaseLeft = 31;
+    var bgLeft = this.width - teaseLeft
+    this.animate('drag', '0.5s ease-out', {transform: 'translateX(' + teaseLeft + 'px)'})
+        .animate('drag-mask', '0.5s ease-out', {
+            'background-position': bgLeft + 'px center'});
+}
+
+Ad.prototype.onTeaseOut = function() {
+    if (!this.isTeasing) return this;
+    this.isTeasing = false;
+    this.animate('drag', '0.5s ease-in', {transform: 'translateX(0px)'})
+        .animate('drag-mask', '0.5s ease-in', {
+            'background-position': this.width + 'px center'});
 }

@@ -160,13 +160,28 @@
       <script type="text/javascript" gwd-events="handlers">
         window.gwd = window.gwd || {};
         gwd.cta = function(event) {
-          alert("CTA");
+          console.log("CTA");
         };
         gwd.init = function(event) {
           gwd.ad = new Ad({
             width: 300,
             height: 250
           });
+        };
+        gwd.onStartDrag = function(event) {
+          gwd.ad.onStartDrag();
+        };
+        gwd.onDragFinish = function(event) {
+          gwd.ad.onDragFinish();
+        };
+        gwd.onDragStart = function(event) {
+          gwd.ad.onDragStart(event);
+        };
+        gwd.onDragUpdate = function(event) {
+          gwd.ad.onDragUpdate(event);
+        };
+        gwd.tease = function(event) {
+          gwd.ad.tease();
         };
       </script>
       <script type="text/javascript" gwd-events="registration">
@@ -175,10 +190,18 @@
         gwd.actions.events.registerEventHandlers = function(event) {
           gwd.actions.events.addHandler('interaction', 'click', gwd.cta, false);
           gwd.actions.events.addHandler('page1', 'pagepresenting', gwd.init, false);
+          gwd.actions.events.addHandler('drag-handle', 'mousedown', gwd.onDragStart, false);
+          gwd.actions.events.addHandler('document.body', 'mouseup', gwd.onDragFinish, false);
+          gwd.actions.events.addHandler('page1', 'mousemove', gwd.onDragUpdate, false);
+          gwd.actions.events.addHandler('drag-handle', 'mouseover', gwd.tease, false);
         };
         gwd.actions.events.deregisterEventHandlers = function(event) {
           gwd.actions.events.removeHandler('interaction', 'click', gwd.cta, false);
           gwd.actions.events.removeHandler('page1', 'pagepresenting', gwd.init, false);
+          gwd.actions.events.removeHandler('drag-handle', 'mousedown', gwd.onDragStart, false);
+          gwd.actions.events.removeHandler('document.body', 'mouseup', gwd.onDragFinish, false);
+          gwd.actions.events.removeHandler('page1', 'mousemove', gwd.onDragUpdate, false);
+          gwd.actions.events.removeHandler('drag-handle', 'mouseover', gwd.tease, false);
         };
         document.addEventListener("DOMContentLoaded", gwd.actions.events.registerEventHandlers);
         document.addEventListener("unload", gwd.actions.events.deregisterEventHandlers);
@@ -191,20 +214,20 @@
     <div is="gwd-pagedeck" class="gwd-page-container" id="pagedeck">
       <div is="gwd-page" id="page1" class="gwd-page-wrapper gwd-page-size gwd-lightbox" data-gwd-width="300px" data-gwd-height="250px">
         <div class="gwd-page-content gwd-page-size">
-          <img is="gwd-image" source="assets/bg03.jpg" id="bg" class="gwd-img-s9ah" data-gwd-tl-hidden="" data-gwd-tl-locked="">
-          <div class="gwd-div-1vig" id="underlay" data-gwd-tl-hidden="" data-gwd-tl-locked="">
+          <img is="gwd-image" source="assets/bg03.jpg" id="bg" class="gwd-img-s9ah" data-gwd-tl-locked="">
+          <div class="gwd-div-1vig" id="underlay" data-gwd-tl-locked="">
             <img is="gwd-image" source="assets/img_logo.png" id="logo" class="gwd-img-ka6o">
             <img is="gwd-image" source="assets/txt03.png" id="txt-final" class="gwd-img-fbp1">
           </div>
           <img is="gwd-image" source="assets/bg01.jpg" id="img-before" class="gwd-img-wlas gwd-gen-jzbmgwdanimation">
-          <img is="gwd-image" source="assets/txt01.png" id="txt-tem" class="gwd-img-1pw4" data-gwd-tl-locked="" data-gwd-tl-hidden="">
+          <img is="gwd-image" source="assets/txt01.png" id="txt-tem" class="gwd-img-1pw4" data-gwd-tl-locked="">
           <div class="gwd-div-mgj6" id="interaction">
             <div class="gwd-div-58bg" id="cta"></div>
             <div class="gwd-div-10xu" id="drag">
               <img is="gwd-image" source="assets/img_arraste.png" id="drag-label" class="gwd-img-13x2">
               <img is="gwd-image" source="assets/img_bar.png" id="drag-no-label" class="gwd-img-1x8z">
               <div class="gwd-div-esuw" id="drag-mask" style="background: url('assets/bg02.jpg') no-repeat;"></div>
-              <div class="gwd-div-z5h5"></div>
+              <div class="gwd-div-z5h5 gwd-gen-4esigwdanimation" id="drag-handle"></div>
             </div>
           </div>
         </div>
