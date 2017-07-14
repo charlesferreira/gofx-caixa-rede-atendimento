@@ -56,13 +56,6 @@
       width: 300px;
       height: 250px;
     }
-    .gwd-img-1pw4 {
-      position: absolute;
-      width: 300px;
-      height: 250px;
-      top: 0px;
-      left: 0px;
-    }
     .gwd-img-fbp1 {
       position: absolute;
       width: 300px;
@@ -121,17 +114,17 @@
     }
     .gwd-div-mgj6 {
       position: absolute;
-      left: 0px;
       top: 0px;
       width: 300px;
       height: 250px;
+      left: 0px;
     }
     .gwd-div-10xu {
       position: absolute;
-      left: 0px;
       top: 0px;
       width: 300px;
       height: 250px;
+      left: 0px;
     }
     .gwd-div-esuw {
       height: 250px;
@@ -144,10 +137,27 @@
     }
     .gwd-div-z5h5 {
       position: absolute;
-      width: 63.6px;
       height: 249.994px;
-      left: 1.21307e-05px;
       top: 0.009px;
+      width: 360px;
+      left: -300px;
+    }
+    .gwd-div-98gu {
+      position: absolute;
+      left: 0px;
+      top: 0px;
+      width: 20px;
+      height: 20px;
+      background-image: none;
+      background-color: transparent;
+    }
+    .gwd-img-1pw4 {
+      display: block;
+      height: 250px;
+      left: 0px;
+      position: absolute;
+      top: 0px;
+      width: 300px;
     }
   </style>
   <link href="../Common/Ad.css" rel="stylesheet">
@@ -160,7 +170,8 @@
       <script type="text/javascript" gwd-events="handlers">
         window.gwd = window.gwd || {};
         gwd.cta = function(event) {
-          console.log("CTA");
+          if (!gwd.ad) return;
+          gwd.ad.cta();
         };
         gwd.init = function(event) {
           gwd.ad = new Ad({
@@ -168,20 +179,25 @@
             height: 250
           });
         };
-        gwd.onStartDrag = function(event) {
-          gwd.ad.onStartDrag();
-        };
         gwd.onDragFinish = function(event) {
-          gwd.ad.onDragFinish();
+          if (!gwd.ad) return;
+          gwd.ad.onDragFinish(event);
         };
         gwd.onDragStart = function(event) {
+          if (!gwd.ad) return;
           gwd.ad.onDragStart(event);
         };
         gwd.onDragUpdate = function(event) {
+          if (!gwd.ad) return;
           gwd.ad.onDragUpdate(event);
         };
-        gwd.tease = function(event) {
-          gwd.ad.tease();
+        gwd.onTeaseOver = function(event) {
+          if (!gwd.ad) return;
+          gwd.ad.onTeaseOver(event);
+        };
+        gwd.onTeaseOut = function(event) {
+          if (!gwd.ad) return;
+          gwd.ad.onTeaseOut(event);
         };
       </script>
       <script type="text/javascript" gwd-events="registration">
@@ -193,7 +209,8 @@
           gwd.actions.events.addHandler('drag-handle', 'mousedown', gwd.onDragStart, false);
           gwd.actions.events.addHandler('document.body', 'mouseup', gwd.onDragFinish, false);
           gwd.actions.events.addHandler('page1', 'mousemove', gwd.onDragUpdate, false);
-          gwd.actions.events.addHandler('drag-handle', 'mouseover', gwd.tease, false);
+          gwd.actions.events.addHandler('drag-handle', 'mouseover', gwd.onTeaseOver, false);
+          gwd.actions.events.addHandler('drag-handle', 'mouseout', gwd.onTeaseOut, false);
         };
         gwd.actions.events.deregisterEventHandlers = function(event) {
           gwd.actions.events.removeHandler('interaction', 'click', gwd.cta, false);
@@ -201,7 +218,8 @@
           gwd.actions.events.removeHandler('drag-handle', 'mousedown', gwd.onDragStart, false);
           gwd.actions.events.removeHandler('document.body', 'mouseup', gwd.onDragFinish, false);
           gwd.actions.events.removeHandler('page1', 'mousemove', gwd.onDragUpdate, false);
-          gwd.actions.events.removeHandler('drag-handle', 'mouseover', gwd.tease, false);
+          gwd.actions.events.removeHandler('drag-handle', 'mouseover', gwd.onTeaseOver, false);
+          gwd.actions.events.removeHandler('drag-handle', 'mouseout', gwd.onTeaseOut, false);
         };
         document.addEventListener("DOMContentLoaded", gwd.actions.events.registerEventHandlers);
         document.addEventListener("unload", gwd.actions.events.deregisterEventHandlers);
@@ -214,20 +232,22 @@
     <div is="gwd-pagedeck" class="gwd-page-container" id="pagedeck">
       <div is="gwd-page" id="page1" class="gwd-page-wrapper gwd-page-size gwd-lightbox" data-gwd-width="300px" data-gwd-height="250px">
         <div class="gwd-page-content gwd-page-size">
+          <div class="gwd-div-98gu" id="x"></div>
           <img is="gwd-image" source="assets/bg03.jpg" id="bg" class="gwd-img-s9ah" data-gwd-tl-locked="">
-          <div class="gwd-div-1vig" id="underlay" data-gwd-tl-locked="">
+          <div class="gwd-div-1vig" id="underlay">
             <img is="gwd-image" source="assets/img_logo.png" id="logo" class="gwd-img-ka6o">
             <img is="gwd-image" source="assets/txt03.png" id="txt-final" class="gwd-img-fbp1">
           </div>
-          <img is="gwd-image" source="assets/bg01.jpg" id="img-before" class="gwd-img-wlas gwd-gen-jzbmgwdanimation">
-          <img is="gwd-image" source="assets/txt01.png" id="txt-tem" class="gwd-img-1pw4" data-gwd-tl-locked="">
+          <img is="gwd-image" source="assets/bg01.jpg" id="img-before" class="gwd-img-wlas gwd-gen-jzbmgwdanimation" data-gwd-tl-locked="">
           <div class="gwd-div-mgj6" id="interaction">
             <div class="gwd-div-58bg" id="cta"></div>
             <div class="gwd-div-10xu" id="drag">
               <img is="gwd-image" source="assets/img_arraste.png" id="drag-label" class="gwd-img-13x2">
               <img is="gwd-image" source="assets/img_bar.png" id="drag-no-label" class="gwd-img-1x8z">
-              <div class="gwd-div-esuw" id="drag-mask" style="background: url('assets/bg02.jpg') no-repeat;"></div>
-              <div class="gwd-div-z5h5 gwd-gen-4esigwdanimation" id="drag-handle"></div>
+              <div class="gwd-div-esuw" id="drag-mask" style="background: url('assets/bg02.jpg') 300px center no-repeat;">
+                <img is="gwd-image" source="assets/txt01.png" id="txt-tem" class="gwd-img-1pw4">
+              </div>
+              <div class="gwd-div-z5h5 gwd-gen-4esigwdanimation" id="drag-handle" data-gwd-tl-locked=""></div>
             </div>
           </div>
         </div>
