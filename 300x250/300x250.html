@@ -5,11 +5,10 @@
   <meta charset="utf-8">
   <meta name="generator" content="Google Web Designer 1.9.0.0619">
   <meta name="template" content="Banner 3.0.0">
-  <meta name="environment" content="gwd-doubleclick">
+  <meta name="environment" content="gwd-genericad">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="gwdpage_style.css" rel="stylesheet" data-version="8" data-exports-type="gwd-page">
   <link href="gwdpagedeck_style.css" rel="stylesheet" data-version="9" data-exports-type="gwd-pagedeck">
-  <link href="gwddoubleclick_style.css" rel="stylesheet" data-version="14" data-exports-type="gwd-doubleclick">
   <link href="gwdimage_style.css" rel="stylesheet" data-version="9" data-exports-type="gwd-image">
   <style type="text/css" id="gwd-lightbox-style">
     .gwd-lightbox {
@@ -139,8 +138,8 @@
       position: absolute;
       height: 249.994px;
       top: 0.009px;
-      width: 360px;
       left: -300px;
+      width: 600px;
     }
     .gwd-div-98gu {
       position: absolute;
@@ -159,13 +158,20 @@
       top: 0px;
       width: 300px;
     }
+    .gwd-div-3ug6 {
+      position: absolute;
+      left: 0px;
+      top: 0px;
+      width: 300px;
+      height: 250px;
+    }
   </style>
   <link href="../Common/Ad.css" rel="stylesheet">
   <script type="text/javascript" src="../Common/Ad.js"></script><script data-source="googbase_min.js" data-version="4" data-exports-type="googbase" src="googbase_min.js"></script><script data-source="gwd_webcomponents_min.js" data-version="5" data-exports-type="gwd_webcomponents" src="gwd_webcomponents_min.js"></script>
   <script
-  data-source="gwdpage_min.js" data-version="8" data-exports-type="gwd-page" src="gwdpage_min.js"></script><script data-source="gwdpagedeck_min.js" data-version="9" data-exports-type="gwd-pagedeck" src="gwdpagedeck_min.js"></script><script data-source="https://s0.2mdn.net/ads/studio/Enabler.js" data-exports-type="gwd-doubleclick" src="https://s0.2mdn.net/ads/studio/Enabler.js"></script>
+  data-source="gwdpage_min.js" data-version="8" data-exports-type="gwd-page" src="gwdpage_min.js"></script><script data-source="gwdpagedeck_min.js" data-version="9" data-exports-type="gwd-pagedeck" src="gwdpagedeck_min.js"></script><script data-source="gwdgenericad_min.js" data-version="4" data-exports-type="gwd-genericad" src="gwdgenericad_min.js"></script>
     <script
-    data-source="gwddoubleclick_min.js" data-version="14" data-exports-type="gwd-doubleclick" src="gwddoubleclick_min.js"></script><script data-source="gwdimage_min.js" data-version="9" data-exports-type="gwd-image" src="gwdimage_min.js"></script>
+    data-source="gwdimage_min.js" data-version="9" data-exports-type="gwd-image" src="gwdimage_min.js"></script>
       <script type="text/javascript" gwd-events="support" src="gwd-events-support.1.0.js"></script>
       <script type="text/javascript" gwd-events="handlers">
         window.gwd = window.gwd || {};
@@ -204,22 +210,24 @@
         // Support code for event handling in Google Web Designer
          // This script block is auto-generated. Please do not edit!
         gwd.actions.events.registerEventHandlers = function(event) {
-          gwd.actions.events.addHandler('interaction', 'click', gwd.cta, false);
           gwd.actions.events.addHandler('page1', 'pagepresenting', gwd.init, false);
           gwd.actions.events.addHandler('drag-handle', 'mousedown', gwd.onDragStart, false);
           gwd.actions.events.addHandler('document.body', 'mouseup', gwd.onDragFinish, false);
           gwd.actions.events.addHandler('page1', 'mousemove', gwd.onDragUpdate, false);
-          gwd.actions.events.addHandler('drag-handle', 'mouseover', gwd.onTeaseOver, false);
-          gwd.actions.events.addHandler('drag-handle', 'mouseout', gwd.onTeaseOut, false);
+          gwd.actions.events.addHandler('drag', 'mousemove', gwd.onTeaseOver, false);
+          gwd.actions.events.addHandler('drag', 'mouseout', gwd.onTeaseOut, false);
+          gwd.actions.events.addHandler('interaction', 'click', gwd.cta, false);
+          gwd.actions.events.addHandler('page1', 'mouseout', gwd.onDragFinish, false);
         };
         gwd.actions.events.deregisterEventHandlers = function(event) {
-          gwd.actions.events.removeHandler('interaction', 'click', gwd.cta, false);
           gwd.actions.events.removeHandler('page1', 'pagepresenting', gwd.init, false);
           gwd.actions.events.removeHandler('drag-handle', 'mousedown', gwd.onDragStart, false);
           gwd.actions.events.removeHandler('document.body', 'mouseup', gwd.onDragFinish, false);
           gwd.actions.events.removeHandler('page1', 'mousemove', gwd.onDragUpdate, false);
-          gwd.actions.events.removeHandler('drag-handle', 'mouseover', gwd.onTeaseOver, false);
-          gwd.actions.events.removeHandler('drag-handle', 'mouseout', gwd.onTeaseOut, false);
+          gwd.actions.events.removeHandler('drag', 'mousemove', gwd.onTeaseOver, false);
+          gwd.actions.events.removeHandler('drag', 'mouseout', gwd.onTeaseOut, false);
+          gwd.actions.events.removeHandler('interaction', 'click', gwd.cta, false);
+          gwd.actions.events.removeHandler('page1', 'mouseout', gwd.onDragFinish, false);
         };
         document.addEventListener("DOMContentLoaded", gwd.actions.events.registerEventHandlers);
         document.addEventListener("unload", gwd.actions.events.deregisterEventHandlers);
@@ -227,19 +235,20 @@
 </head>
 
 <body>
-  <gwd-doubleclick id="gwd-ad" polite-load="">
-    <gwd-metric-configuration></gwd-metric-configuration>
+  <gwd-genericad id="gwd-ad">
     <div is="gwd-pagedeck" class="gwd-page-container" id="pagedeck">
       <div is="gwd-page" id="page1" class="gwd-page-wrapper gwd-page-size gwd-lightbox" data-gwd-width="300px" data-gwd-height="250px">
         <div class="gwd-page-content gwd-page-size">
           <div class="gwd-div-98gu" id="x"></div>
-          <img is="gwd-image" source="assets/bg03.jpg" id="bg" class="gwd-img-s9ah" data-gwd-tl-locked="">
+          <img is="gwd-image" source="assets/bg03.jpg" id="bg" class="gwd-img-s9ah">
           <div class="gwd-div-1vig" id="underlay">
             <img is="gwd-image" source="assets/img_logo.png" id="logo" class="gwd-img-ka6o">
-            <img is="gwd-image" source="assets/txt03.png" id="txt-final" class="gwd-img-fbp1">
+            <div class="gwd-div-3ug6" id="txt-final-wrap">
+              <img is="gwd-image" source="assets/txt03.png" id="txt-final" class="gwd-img-fbp1">
+            </div>
           </div>
           <img is="gwd-image" source="assets/bg01.jpg" id="img-before" class="gwd-img-wlas gwd-gen-jzbmgwdanimation" data-gwd-tl-locked="">
-          <div class="gwd-div-mgj6" id="interaction">
+          <div class="gwd-div-mgj6" id="interaction" data-gwd-tl-locked="">
             <div class="gwd-div-58bg" id="cta"></div>
             <div class="gwd-div-10xu" id="drag">
               <img is="gwd-image" source="assets/img_arraste.png" id="drag-label" class="gwd-img-13x2">
@@ -247,13 +256,13 @@
               <div class="gwd-div-esuw" id="drag-mask" style="background: url('assets/bg02.jpg') 300px center no-repeat;">
                 <img is="gwd-image" source="assets/txt01.png" id="txt-tem" class="gwd-img-1pw4">
               </div>
-              <div class="gwd-div-z5h5 gwd-gen-4esigwdanimation" id="drag-handle" data-gwd-tl-locked=""></div>
+              <div class="gwd-div-z5h5 gwd-gen-4esigwdanimation" id="drag-handle"></div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </gwd-doubleclick>
+  </gwd-genericad>
   <script type="text/javascript" id="gwd-init-code">
     (function() {
       var gwdAd = document.getElementById('gwd-ad');

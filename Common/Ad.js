@@ -3,7 +3,7 @@ var Ad = function(options) {
         width: 300,
         height: 250,
         teaseWidth: 25,
-        autoPlayTimeOut: 6000,
+        autoPlayTimeOut: 5000,
         autoPlayMaxTimeOut: 20000,
         slideLeftMaxDuration: 800,
         slideRightMaxDuration: 1500,
@@ -11,18 +11,17 @@ var Ad = function(options) {
             tease: 'all 0.3s ease-in-out',
             txtTemFadeIn: 'all 1.0s ease-out 0.2s',
             dragLabelFadeOut: 'all 0.3s ease-out',
-            dragLabelFadeIn: 'all 0.2s ease-out',
-            dragFadeOut: 'all 1s ease 2.5s',
-            txtFinalFadeIn: 'all 0.5s ease 3.5s',
-            txtFinalFadeOut: 'all 0.5s ease 6.0s',
-            logoFadeIn: 'all 0.5s ease 6.5s',
+            dragLabelFadeIn: 'all 0.4s ease-in 0.1s',
+            dragFadeOut: 'all 0.75s ease 2.5s',
+            txtFinalFadeIn: 'all 0.5s ease 3.0s',
+            txtFinalFadeOut: 'all 0.5s ease 5.8s',
+            logoFadeIn: 'all 0.5s ease 6.1s',
         },
     }).update();
 }
 
 Ad.prototype.update = function() {
     requestAnimationFrame(this.update.bind(this));
-
     var transform = window.getComputedStyle(document.getElementById('x')).transform;
     this.dragX = transform == 'none' ? 0 : transform.match(/([-+]?[\d\.]+)/g)[4];
     var maskX = Math.round(this.width - this.dragX);
@@ -34,9 +33,9 @@ Ad.prototype.setup = function(options, defaultOptions) {
     for (var i in defaultOptions) this[i] = options[i] || defaultOptions[i];
     return this
         .hide('txt-tem')
-        //.hide('txt-final')
+        .hide('txt-final')
         .hide('logo')
-        //.setupAutoPlay();
+        .setupAutoPlay();
 }
 
 Ad.prototype.setupAutoPlay = function() {
@@ -50,13 +49,11 @@ Ad.prototype.setupAutoPlay = function() {
 Ad.prototype.resetAutoPlay = function() {
     if (this.autoPlayTimeOutId) clearTimeout(this.autoPlayTimeOutId);
     this.autoPlayTimeOutId = setTimeout(this.autoPlay.bind(this), this.autoPlayTimeOut);
-    this.isAutoPlaying = false;
     return this;
 }
 
 Ad.prototype.autoPlay = function() {
-    console.log("autoplaying");
-    this.isAutoPlaying = true;
+    this.completeSlide(true);
     return this;
 }
 
@@ -83,14 +80,14 @@ Ad.prototype.flatten = function(values, extras) {
 }
 
 Ad.prototype.cta = function() {
+    if (this.isDragging) return false;
     console.log('CTA');
 }
 
 Ad.prototype.onDragStart = function(event) {
-    if (this.isBusy || this.isAutoPlaying) return;
+    if (this.isAutoPlaying) return;
+    this.dragStarted = true;
     this.hide('drag-label', this.transitions.dragLabelFadeOut);
-    this.isBusy = true;
-    this.isDragging = true;
     this.isTeasing = false;
     this.startX = event.clientX;
 }
@@ -98,51 +95,71 @@ Ad.prototype.onDragStart = function(event) {
 Ad.prototype.onDragFinish = function(event) {
     if (this.isAutoPlaying) return;
     this.completeSlide();
-    this.isDragging = false;
 }
 
 Ad.prototype.onDragUpdate = function(event) {
+    if (this.isAutoPlaying) return;
+
+    if (this.dragStarted && !this.isDragging)
+        this.isDragging = true;
+
     if (this.isDragging) {
+        this.resetAutoPlay();
         var x = event.clientX - this.startX + this.teaseWidth;
+        if (x < 0) {
+            x = 0;
+            this.startX = event.clientX + this.teaseWidth;
+        }
         this.style('x', {transform: 'translateX(' + x + 'px)'});
     }
 }
 
 Ad.prototype.onTeaseOver = function() {
-    if (this.isBusy) return;
+    if (this.isAutoPlaying) return;
     this.isTeasing = true;
     this.style('x', { transform: 'translateX(' + this.teaseWidth + 'px)' }, this.transitions.tease);
 }
 
 Ad.prototype.onTeaseOut = function() {
-    if (this.isBusy || !this.isTeasing) return;
+    if (this.isAutoPlaying || !this.isTeasing) return;
     this.isTeasing = false;
     this.style('x', { transform: 'translateX(0px)' }, this.transitions.tease);
 }
 
-Ad.prototype.completeSlide = function() {
+Ad.prototype.completeSlide = function(forceFinal) {
+    this.isAutoPlaying = true;
     var mid = this.width / 2;
-    var x = this.dragX < mid ? 0 : this.width;
+    var x = (this.dragX > mid || forceFinal) ? this.width : 0;
     var maxDuration = x == 0 ? this.slideLeftMaxDuration : this.slideRightMaxDuration;
-    var duration = Math.round(maxDuration * (mid - Math.abs(this.dragX - mid)) / mid);
+    var duration = forceFinal && this.dragX < mid
+        ? maxDuration
+        : Math.round(maxDuration * (1 - Math.abs(mid - this.dragX) / (mid)));
 
     var transition = 'all ' + duration + 'ms ease-in-out';
     this.style('x', { transform: 'translateX(' + x + 'px)' }, transition);
 
+    if (x == 0)
+        this.show('drag-label', this.transitions.dragLabelFadeIn)
+
     setTimeout(function() {
         if (x == 0) {
-            this.isBusy = false;
-            this.show('drag-label', this.transitions.dragLabelFadeIn)
+            this.isAutoPlaying= false;
         } else {
             this.playLastFrame();
         }
-    }.bind(this), duration);
+    }.bind(this), duration + 50);
+
+    setTimeout(function() {
+        this.dragStarted = false;
+        this.isDragging = false;
+    }.bind(this), 100);
 }
 
 Ad.prototype.playLastFrame = function() {
     this.hide('img-before')
         .show('txt-tem', this.transitions.txtTemFadeIn)
         .hide('drag', this.transitions.dragFadeOut)
-        .hide('txt-final', this.transitions.txtFinalFadeOut)
+        .show('txt-final', this.transitions.txtFinalFadeIn)
+        .hide('txt-final-wrap', this.transitions.txtFinalFadeOut)
         .show('logo', this.transitions.logoFadeIn)
 }
