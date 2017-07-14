@@ -106,10 +106,9 @@ Ad.prototype.onDragUpdate = function(event) {
     if (this.isDragging) {
         this.resetAutoPlay();
         var x = event.clientX - this.startX + this.teaseWidth;
-        if (x < 0) {
-            x = 0;
+        if (x < 0)
             this.startX = event.clientX + this.teaseWidth;
-        }
+        x = Math.max(0, Math.min(this.width, x));
         this.style('x', {transform: 'translateX(' + x + 'px)'});
     }
 }
